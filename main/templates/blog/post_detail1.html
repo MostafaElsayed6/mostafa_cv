@@ -1,0 +1,195 @@
+
+{% load static %}
+<!doctype html>
+<html lang="en">
+    
+<head>
+        <title>Maha - Personal CV/Resume Template | Portfolio & Blog</title>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="description" content="Personal CV/Resume Template with Dynamic Sections" />
+        <meta name="keywords" content="CV, Resume, Portfolio, Blog, Django, HTML, CSS" />
+        <meta name="developer" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        
+        <!-- Google Font-->
+        <link href="http://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+        
+        <link rel="stylesheet" href="{% static 'assets/icons/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+        
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="{% static 'assets/plugins/css/bootstrap.min.css' %}">
+        <!-- Animate CSS-->
+        <link rel="stylesheet" href="{% static 'assets/plugins/css/animate.css' %}">
+        <!-- Owl Carousel CSS-->
+        <link rel="stylesheet" href="{% static 'assets/plugins/css/owl.css' %}">
+        
+        <!-- Custom CSS-->
+        <link rel="stylesheet" href="{% static 'assets/css/styles.css' %}">
+        <link rel="stylesheet" href="{% static 'assets/css/responsive.css' %}">
+        
+    </head>
+    <body class="dark-vertion black-bg">
+        <!--
+        <!- -->
+
+        <!--
+        ===================
+            BLOG (SINGLE POST DETAIL)
+        ===================
+        -->
+        <section class="mh-blog" id="mh-blog">
+            <div class="container">
+                <div class="row section-separator">
+                    <div class="col-md-8">
+                        <article class="dark-bg shadow-1">
+                            {% if post %}
+                                {% if post.cover_image %}
+                                <img src="{{ post.cover_image.url }}" alt="{{ post.title }}" class="img-fluid rounded mb-4">
+                                {% endif %}
+                                
+                                <h1 class="mb-3">{{ post.title }}</h1>
+                                
+                                <div class="mh-blog-post-info mb-4">
+                                    <ul class="d-flex justify-content-between">
+                                        <li>
+                                            <strong>نشر في:</strong> 
+                                            <span>{{ post.publish_date|date:"d M Y" }}</span>
+                                        </li>
+                                        <li>
+                                            <strong>بواسطة:</strong> 
+                                            <span>{{ post.author.get_full_name|default:post.author.username }}</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="post-content mb-5">
+                                    {{ post.content|linebreaks }}
+                                </div>
+                                
+                                <div class="text-center">
+                                    <!-- This link might need adjustment if you only have one page,
+                                         or if it's meant to go back to a list of blogs.
+                                         For a single page, perhaps link to the top of this section. -->
+                                    <a href="{% url 'home' %}#mh-blog" class="btn btn-fill">
+                                        <i class="fa fa-arrow-up"></i> العودة لأعلى المدونة
+                                    </a>
+                                </div>
+                            {% else %}
+                                <div class="alert alert-warning text-center">
+                                    <h3>عذراً!</h3>
+                                    <p>لم يتم العثور على منشور مدونة لعرضه.</p>
+                                    <p>يرجى التأكد من توفر متغير `post` في سياق القالب.</p>
+                                </div>
+                            {% endif %}
+                        </article>
+                        
+                        <!-- التعليقات وقسم التنقل بين المنشورات تم إزالتها لأنها لم تكن جزءًا من الكود الأول الخاص بتفاصيل المقال الذي طلب دمجه -->
+                        
+                    </div>
+  
+  
+        <footer class="mh-footer mh-footer-3" id="mh-contact">
+            <div class="container-fluid">
+                <div class="row section-separator">
+                    <div class="col-sm-12 section-title">
+                        <h3>اتصل بي</h3>
+                    </div>
+                    <div class="map-image image-bg col-sm-12">
+                        <div class="container mt-30">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6 mh-footer-address">
+                                    <div class="col-sm-12 xs-no-padding">
+                                        <div class="mh-address-footer-item dark-bg shadow-1 media">
+                                            <div class="each-icon">
+                                                <i class="fa fa-location-arrow"></i>
+                                            </div>
+                                            <div class="each-info media-body">
+                                                <h4>العنوان</h4>
+                                                <address>
+                                                        الاسكندرية, طريق الساحل  , <br> 
+                                                </address>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 xs-no-padding">
+                                        <div class="mh-address-footer-item media dark-bg shadow-1">
+                                            <div class="each-icon">
+                                                <i class="fa fa-envelope-o"></i>
+                                            </div>
+                                            <div class="each-info media-body">
+                                                <h4>البريد الإلكتروني</h4>
+                                                <a href="mostafaqq7q@gmail.com">mostafaqq7q@gmail.com</a><br>
+                                                <!-- <a href="mailto:yourmail@email.com">yourmail@email.com</a> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 xs-no-padding">
+                                        <div class="mh-address-footer-item media dark-bg shadow-1">
+                                            <div class="each-icon">
+                                                <i class="fa fa-phone"></i>
+                                            </div>
+                                            <div class="each-info media-body">
+                                                <h4>الهاتف</h4>
+                                                <a href="callto:+201550658172">+201550658172</a><br>
+                                                <!-- <a href="callto:(880)-8976-987">(880)-8976-987</a> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="mh-footer-map">
+                                        <div id="map"></div>
+                                    </div>
+                                <div class="col-sm-12">
+                                <div class="mh-copyright text-center">
+                                    <p><a href="#">mostafa</a></p>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        
+    <!--
+    ==============
+    * JS Files *
+    ==============
+    -->
+    
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    
+    <!-- jQuery -->
+    <script src="{% static 'assets/plugins/js/jquery.min.js' %}"></script>
+    <!-- popper -->
+    <script src="{% static 'assets/plugins/js/popper.min.js' %}"></script>
+    <!-- bootstrap -->
+    <script src="{% static 'assets/plugins/js/bootstrap.min.js' %}"></script>
+    <!-- owl carousel -->
+    <script src="{% static 'assets/plugins/js/owl.carousel.js' %}"></script>
+    <!-- validator -->
+    <script src="{% static 'assets/plugins/js/validator.min.js' %}"></script>
+    <!-- wow -->
+    <script src="{% static 'assets/plugins/js/wow.min.js' %}"></script>
+    <!-- mixin js-->
+    <script src="{% static 'assets/plugins/js/jquery.mixitup.min.js' %}"></script>
+    <!-- circle progress-->
+    <script src="{% static 'assets/plugins/js/circle-progress.js' %}"></script>
+    <!-- jquery nav -->
+    <script src="{% static 'assets/plugins/js/jquery.nav.js' %}"></script>
+    <!-- Fancybox js-->
+    <script src="{% static 'assets/plugins/js/jquery.fancybox.min.js' %}"></script>
+    <!-- Map api -->
+    <script src="http://maps.googleapis.com/maps/api/js?v=3.exp&amp;key=AIzaSyCRP2E3BhaVKYs7BvNytBNumU0MBmjhhxc"></script>
+    <!-- isotope js-->
+    <script src="{% static 'assets/plugins/js/isotope.pkgd.js' %}"></script>
+    <script src="{% static 'assets/plugins/js/packery-mode.pkgd.js' %}"></script>
+    <!-- Custom Scripts-->
+    <script src="{% static 'assets/js/map-init.js' %}"></script>
+    <script src="{% static 'assets/js/custom-scripts.js' %}"></script>
+</body>
+
+</html>
+```

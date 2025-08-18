@@ -1,0 +1,44 @@
+<!-- templates/blog/post_detail.html -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="mh-blog-detail">
+    <div class="container">
+        <div class="row section-separator">
+            <div class="col-md-8 mx-auto">
+                <article class="dark-bg shadow-1">
+                    {% if post.cover_image %}
+                    <img src="{{ post.cover_image.url }}" alt="{{ post.title }}" class="img-fluid rounded mb-4">
+                    {% endif %}
+                    
+                    <h1 class="mb-3">{{ post.title }}</h1>
+                    
+                    <div class="mh-blog-post-info mb-4">
+                        <ul class="d-flex justify-content-between">
+                            <li>
+                                <strong>نشر في:</strong> 
+                                <span>{{ post.publish_date|date:"d M Y" }}</span>
+                            </li>
+                            <li>
+                                <strong>بواسطة:</strong> 
+                                <span>{{ post.author.get_full_name|default:post.author.username }}</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="post-content mb-5">
+                        {{ post.content|linebreaks }}
+                    </div>
+                    
+                    <div class="text-center">
+                        <a href="{% url 'home' %}#mh-blog" class="btn btn-fill">
+                            <i class="fa fa-arrow-left"></i> العودة إلى المدونة
+                        </a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

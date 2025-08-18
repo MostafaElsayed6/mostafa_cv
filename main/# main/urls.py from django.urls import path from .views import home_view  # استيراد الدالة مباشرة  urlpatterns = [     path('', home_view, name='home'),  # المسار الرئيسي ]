@@ -1,0 +1,7 @@
+# main/urls.py
+from django.urls import path
+from .views import home_view  # استيراد الدالة مباشرة
+
+urlpatterns = [
+    path('', home_view, name='home'),  # المسار الرئيسي
+]

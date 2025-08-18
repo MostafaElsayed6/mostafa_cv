@@ -1,0 +1,878 @@
+```html
+{% load static %}
+<!doctype html>
+<html dir="rtl" lang="ar">
+    
+<head>
+        <title>mostafa_cv</title>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="Maha Personal cv/resume template for professional and personal website." />
+        <meta name="keywords" content="creative, cv, designer,  online cv, online resume, powerful portfolio, professional, professional resume, responsive, resume, vcard " />
+        <meta name="developer" content="Md. Siful Islam">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+                
+        <!-- FAV AND ICONS   -->
+        <link rel="shortcut icon" href="{% static 'assets/images/favicon.ico' %}">
+        <link rel="shortcut icon" href="{% static 'assets/images/apple-icon.png' %}">
+        <link rel="shortcut icon" sizes="72x72" href="{% static 'assets/images/apple-icon-72x72.png' %}">
+        <link rel="shortcut icon" sizes="114x114" href="{% static 'assets/images/apple-icon-114x114.png' %}">
+        
+        <!-- Google Font-->
+        <link href="http://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="{% static 'assets/icons/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="{% static 'assets/plugins/css/bootstrap.min.css' %}">
+        <!-- Animate CSS-->
+        <link rel="stylesheet" href="{% static 'assets/plugins/css/animate.css' %}">
+        <!-- Owl Carousel CSS-->
+        <link rel="stylesheet" href="{% static 'assets/plugins/css/owl.css' %}">
+        <!-- Fancybox-->
+        <link rel="stylesheet" href="{% static 'assets/plugins/css/jquery.fancybox.min.css' %}">
+        <!-- Custom CSS-->
+        <link rel="stylesheet" href="{% static 'assets/css/styles.css' %}">
+        <link rel="stylesheet" href="{% static 'assets/css/responsive.css' %}">
+        <!-- Colors -->
+        <link rel="alternate stylesheet" href="{% static 'assets/css/colors/blue.css' %}" title="blue">
+        <link rel="stylesheet" href="{% static 'assets/css/colors/defauld.css' %}" title="defauld">
+        <link rel="alternate stylesheet" href="{% static 'assets/css/colors/green.css' %}" title="green">
+        <link rel="alternate stylesheet" href="{% static 'assets/css/colors/blue-munsell.css' %}" title="blue-munsell">
+        <link rel="alternate stylesheet" href="{% static 'assets/css/colors/orange.css' %}" title="orange">
+        <link rel="alternate stylesheet" href="{% static 'assets/css/colors/purple.css' %}" title="purple">
+        <link rel="alternate stylesheet" href="{% static 'assets/css/colors/slate.css' %}" title="slate">
+        <link rel="alternate stylesheet" href="{% static 'assets/css/colors/yellow.css' %}" title="yellow">
+    </head>
+    <body class="dark-vertion black-bg mh-rtl">
+        
+        <!-- Start Loader -->
+        <div class="section-loader">
+            <div class="loader">
+                <div></div>
+                <div></div> 
+            </div>
+        </div>
+        <!-- End Loader -->
+        
+        
+        <!--
+        ===================
+           NAVIGATION
+        ===================
+        -->
+        <header class="black-bg mh-header mh-fixed-nav nav-scroll mh-xs-mobile-nav" id="mh-header">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="row">
+                    <nav class="navbar navbar-expand-lg mh-nav nav-btn">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon icon"></span>
+                        </button>
+                    
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav mr-auto ml-auto">
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="#mh-home">الرئسية</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#mh-about">حول</a>
+                                </li>
+                                <li class="nav-item"> 
+                                   <a class="nav-link" href="#mh-skills">مهارات</a>
+                                </li>                                
+                                <li class="nav-item">
+                                   <a class="nav-link" href="#mh-experience">خبرة</a>
+                                </li>                                
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#mh-portfolio">محفظة</a>
+                                </li>                               
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#mh-pricing">التسعير</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#mh-blog">مدونة</a>
+                                </li>
+                                <li class="nav-item">
+                                   <a class="nav-link" href="#mh-contact">اتصل</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </header>
+        
+        <!--
+        ===================
+            HOME 
+        ===================
+        -->
+        <section class="mh-home" id="mh-home">
+            <div class="home-ovimg">
+                <div class="container">
+                    <div class="row xs-column-reverse section-separator vertical-middle-content home-padding">
+                        <div class="col-sm-6">
+                            <div class="mh-header-info">
+                                <div class="mh-promo">
+                                    <span>{{ content.greeting }}</span>
+                                </div>
+                                
+                                <h2>{{ content.name }}</h2>
+                                <h4>{{ content.job_title }}</h4>
+                                
+                                <ul>
+                                    <li><i class="fa fa-envelope"></i><a href="mailto:{{ content.email }}">{{ content.email }}</a></li>
+                                    <li><i class="fa fa-phone"></i><a href="tel:{{ content.phone }}">{{ content.phone }}</a></li>
+                                    <li><i class="fa fa-map-marker"></i><address>{{ content.address }}</address></li>
+                                </ul>
+                                
+                                <ul class="social-icon">
+                                    {% if content.facebook_url %}
+                                    <li><a href="{{ content.facebook_url }}" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                                    {% endif %}
+                                    
+                                    {% if content.twitter_url %}
+                                    <li><a href="{{ content.twitter_url }}" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                                    {% endif %}
+                                    
+                                    {% if content.github_url %}
+                                    <li><a href="{{ content.github_url }}" target="_blank"><i class="fa fa-github"></i></a></li>
+                                    {% endif %}
+                                    
+                                    {% if content.dribbble_url %}
+                                    <li><a href="{{ content.dribbble_url }}" target="_blank"><i class="fa fa-dribbble"></i></a></li>
+                                    {% endif %}
+                                </ul>
+                                
+                                <!-- رابط لوحة التحكم للمشرف -->
+                                <!-- {% if user.is_superuser %}
+                                <div class="mt-4">
+                                    <a href="/admin/main/homecontent/{{ content.id }}/change/" 
+                                       class="btn btn-sm btn-outline-secondary">
+                                        <i class="fa fa-edit"></i> تعديل من لوحة التحكم
+                                    </a>
+                                </div>
+                                {% endif %} -->
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="hero-img">
+                                <div class="img-border">
+                                    {% if content.profile_image %}
+                                        <img src="{{ content.profile_image.url }}" alt="{{ content.name }}" class="img-fluid">
+                                    {% else %}
+                                        <img src="{% static 'assets/images/hero.png' %}" alt="" class="img-fluid">
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>   
+
+<!-- ... باقي الكود ... -->
+```
+        <!--
+       
+            ABOUT  
+        =================
+        -->
+        <section class="mh-about" id="mh-about">
+            <div class="container">
+                <div class="row section-separator">
+                    <div class="col-sm-12 col-md-6">
+                        <div class="mh-about-img shadow-2">
+                            <img src="{% static 'assets/images/ab-img.png' %}" alt="" class="img-fluid">
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <div class="mh-about-inner">
+                            {% if about %}
+                                <h2>{{ about.title }}</h2>
+                                <p>{{ about.content }}</p>
+                                
+                                <div class="mh-about-tag">
+                                    <ul>
+                                        {% for skill in tech_skills %}
+                                            <li><span>{{ skill.name }}</span></li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                                
+                                <a href="{{ about.cv_url }}" class="btn btn-fill">
+                                    تحميل السيرة الذاتية <i class="fa fa-download"></i>
+                                </a>
+                            {% else %}
+                                <div class="alert alert-warning">لا يوجد محتوى لعرضه</div>
+                            {% endif %}
+                            
+                            <!-- {% if user.is_superuser %}
+                            <div class="mt-3">
+                                <a href="/admin/main/aboutsection/{{ about.id }}/change/" 
+                                   class="btn btn-sm btn-outline-light">
+                                    <i class="fa fa-edit"></i> تعديل من لوحة التحكم
+                                </a>
+                            </div>
+                            {% endif %} -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--
+        
+            SERVICES 
+        ===================
+        -->
+        <section class="mh-service">
+            <div class="container">
+                <div class="row section-separator">
+                    <div class="col-sm-12 text-center section-title">
+                        <h2>خدماتي</h2>
+                    </div>
+                    
+                    {% for service in services %}
+                    <div class="col-sm-4">
+                        <div class="mh-service-item shadow-1 dark-bg">
+                            <i class="fa fa-code iron-color"></i>
+                            <i class="{{ service.icon }}"></i>
+                            <h3>{{ service.title }}</h3>
+                            <p>{{ service.description }}</p>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <div class="col-12 text-center">
+                        <div class="alert alert-info">لا توجد خدمات متاحة</div>
+                    </div>
+                    {% endfor %}
+                    
+                    <!-- {% if user.is_superuser and services %}
+                    <div class="col-12 text-center mt-4">
+                        <a href="/admin/main/service/" 
+                           class="btn btn-outline-light">
+                            <i class="fa fa-cog"></i> إدارة الخدمات
+                        </a>
+                    </div>
+                    {% endif %} -->
+                </div>
+            </div>
+        </section>       
+        
+        <!--
+           SKILLS 
+        ===================
+        -->
+        <section class="mh-skills" id="mh-skills">
+            <div class="container">
+                <div class="row section-separator">
+                    <div class="section-title text-center col-sm-12">
+                        <!--<h2>Skills</h2>-->
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <div class="mh-skills-inner">
+                            <div class="mh-professional-skill">
+                                <h3>مهارات تقنية</h3>
+                                <div class="each-skills">
+                                    {% for skill in tech_skills %}
+                                    <div class="candidatos">
+                                        <div class="parcial">
+                                            <div class="info">
+                                                <div class="nome">{{ skill.name }}</div>
+                                                <div class="percentagem-num">{{ skill.percentage }}%</div>
+                                            </div>
+                                            <div class="progressBar">
+                                                <div class="percentagem" style="width: {{ skill.percentage }}%;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <div class="mh-professional-skills">
+                            <h3>مهارات احترافية</h3>
+                            <ul class="mh-professional-progress">
+                                {% for skill in pro_skills %}
+                                <li>
+                                    <div class="mh-progress mh-progress-circle" data-progress="{{ skill.percentage }}"></div>
+                                    <div class="pr-skill-name">{{ skill.name }}</div>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- {% if user.is_superuser %}
+                    <div class="col-12 text-center mt-4">
+                        <a href="/admin/main/skill/" 
+                           class="btn btn-outline-light">
+                            <i class="fa fa-cog"></i> إدارة المهارات
+                        </a>
+                    </div>
+                    {% endif %} -->
+                </div>
+            </div>
+        </section>
+       <!--
+===================
+   EXPERIENCES 
+===================
+-->
+<section class="mh-experince" id="mh-experience">
+    <div class="bolor-overlay">
+        <div class="container">
+            <div class="row section-separator">
+                <!-- التعليم -->
+                <div class="col-sm-12 col-md-6">
+                    <div class="mh-education">
+                        <h3>التعليم</h3>
+                        <div class="mh-education-deatils">
+                            {% for edu in educations %}
+                            <div class="mh-education-item dark-bg">
+                                <h4>{{ edu.degree }}, <a href="#">{{ edu.institute }}</a></h4>
+                                <div class="mh-eduyear">{{ edu.period }}</div>
+                                <p>{{ edu.description }}</p>
+                            </div>
+                            {% empty %}
+                            <div class="mh-education-item dark-bg">
+                                <h4>الفن والوسائط المتعددة, <a href="#">جامعة اكسفورد</a></h4>
+                                <div class="mh-eduyear">2005-2008</div>
+                                <p>إنها حقيقة راسخة أن القارئ سوف يصرفه المحتوى المقروء عند النظر إلى تخطيطه. نقطة استخدام لوريم إيبسوم</p>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- الخبرة العملية -->
+                <div class="col-sm-12 col-md-6">
+                    <div class="mh-work">
+                        <h3>خبرة في العمل</h3>
+                        <div class="mh-experience-deatils">
+                            {% for exp in experiences %}
+                            <div class="mh-work-item dark-bg">
+                                <h4>{{ exp.position }}, <a href="#">{{ exp.company }}</a></h4>
+                                <div class="mh-eduyear">{{ exp.period }}</div>
+                                <span>: المسئولية</span>
+                                <ul class="work-responsibility">
+                                    {% for resp in exp.get_responsibilities_list %}
+                                    <li>{{ resp }} <i class="fa fa-circle"></i></li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            {% empty %}
+                            <div class="mh-work-item dark-bg">
+                                <h4>الفن والوسائط المتعددة, <a href="#">جامعة اكسفورد</a></h4>
+                                <div class="mh-eduyear">2005-2008</div>
+                                <span>: المسئولية</span>
+                                <ul class="work-responsibility">
+                                    <li>التحقق من صحة التعليمات البرمجية <i class="fa fa-circle"></i></li>
+                                    <li>ادارة مشروع <i class="fa fa-circle"></i></li>
+                                </ul>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- روابط التعديل للمشرف -->
+                <!-- {% if user.is_superuser %}
+                <div class="col-12 text-center mt-4">
+                    <a href="/admin/main/education/" class="btn btn-outline-light mr-2">
+                        <i class="fa fa-edit"></i> إدارة التعليم
+                    </a>
+                    <a href="/admin/main/experience/" class="btn btn-outline-light">
+                        <i class="fa fa-edit"></i> إدارة الخبرات
+                    </a>
+                </div>
+                {% endif %} -->
+            </div>
+        </div>
+    </div>
+</section>
+        
+        <!--
+===================
+   PRICING 
+===================
+-->
+<section class="mh-pricing" id="mh-pricing">
+    <div class="">
+        <div class="container">
+            <div class="row section-separator">
+                <div class="col-sm-12 section-title">
+                    <h3>جدول التسعير</h3>
+                </div>
+                
+                {% for plan in pricing_plans %}
+                <div class="col-sm-12 col-md-4">
+                    <div class="mh-pricing dark-bg shadow-2">
+                        <i class="{{ plan.get_icon_class }}"></i>
+                        <h4>{{ plan.title }}</h4>
+                        <p>{{ plan.description }}</p>
+                        <h5>{{ plan.price }}</h5>
+                        <ul>
+                            {% for feature in plan.get_features_list %}
+                            <li>{{ feature }}</li>
+                            {% endfor %}
+                        </ul>
+                        <a href="{{ plan.button_url }}" class="btn btn-fill">{{ plan.button_text }}</a>
+                    </div>  
+                </div>
+                {% empty %}
+                <!-- محتوى افتراضي إذا لم توجد خطط -->
+                <div class="col-sm-12 col-md-4">
+                    <div class="mh-pricing dark-bg shadow-2">
+                        <i class="fa fa-calendar"></i>
+                        <h4>العمل بدوام كامل</h4>
+                        <p>أنا متاح للوقت الكامل</p>
+                        <h5>$1500</h5>
+                        <ul>
+                            <li>تطوير الشبكة</li>
+                            <li>إعلان</li>
+                            <li>تطوير اللعبة</li>
+                            <li>الكتابة الموسيقية</li>
+                        </ul>
+                        <a href="#" class="btn btn-fill">وظفني</a>
+                    </div>  
+                </div>
+                <div class="col-sm-12 col-md-4">
+                    <div class="mh-pricing dark-bg shadow-2">
+                        <i class="fa fa-file"></i>
+                        <h4>مشروع سعر ثابت</h4>
+                        <p>أنا متاح للأدوار الثابتة</p>
+                        <h5>$500</h5>
+                        <ul>
+                            <li>تطوير الشبكة</li>
+                            <li>إعلان</li>
+                            <li>تطوير اللعبة</li>
+                            <li>الكتابة الموسيقية</li>
+                        </ul>
+                        <a href="#" class="btn btn-fill">وظفني</a>
+                    </div>  
+                </div>
+                <div class="col-sm-12 col-md-4">
+                    <div class="mh-pricing dark-bg shadow-2">
+                        <i class="fa fa-hourglass"></i>
+                        <h4>العمل كل ساعة</h4>
+                        <p>أنا متاح لمشاريع كل ساعة</p>
+                        <h5>$50</h5>
+                        <ul>
+                            <li>تطوير الشبكة</li>
+                            <li>إعلان</li>
+                            <li>تطوير اللعبة</li>
+                            <li>الكتابة الموسيقية</li>
+                        </ul>
+                        <a href="#" class="btn btn-fill">وظفني</a>
+                    </div>  
+                </div>
+                {% endfor %}
+                
+                <!-- {% if user.is_superuser %}
+                <div class="col-12 text-center mt-4">
+                    <a href="/admin/main/pricingplan/" class="btn btn-outline-light">
+                        <i class="fa fa-cog"></i> إدارة خطط التسعير
+                    </a>
+                </div>
+                {% endif %} -->
+            </div>
+        </div>
+    </div>
+</section>
+        <!--
+        <
+===================
+   BLOG 
+===================
+-->
+<section class="mh-blog" id="mh-blog">
+    <div class="container">
+        <div class="row section-separator">
+            <div class="col-sm-12 section-title">
+                <h3>المشاركات مميزة</h3>
+            </div>
+            
+            {% for post in featured_posts %}
+            <div class="col-sm-12 col-md-4">
+                <div class="mh-blog-item dark-bg">
+                    {% if post.cover_image %}
+                    <img src="{{ post.cover_image.url }}" alt="{{ post.title }}" class="img-fluid">
+                    {% else %}
+                    <img src="{% static 'assets/images/b-1.png' %}" alt="صورة افتراضية" class="img-fluid">
+                    {% endif %}
+                    <div class="blog-inner">
+                        <h2><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
+                        <div class="mh-blog-post-info">
+                            <ul>
+                                <li><a href="#">{{ post.publish_date|date:"d.m.y" }}</a><strong>بعد على</strong></li>
+                                <li><a href="#">{{ post.author.get_full_name|default:post.author.username }}</a><strong>بواسطة</strong></li>
+                            </ul>
+                        </div>
+                        <p>{{ post.excerpt|default:post.content|truncatewords:20 }}</p>
+                        <a href="{{ post.get_absolute_url }}">قراءة المزيد</a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <!-- محتوى افتراضي إذا لم توجد منشورات مميزة -->
+            <div class="col-sm-12 col-md-4">
+                <div class="mh-blog-item dark-bg">
+                    <img src="{% static 'assets/images/b-3.png' %}" alt="" class="img-fluid">
+                    <div class="blog-inner">
+                        <h2><a href="#">حياة خالية من الاختناقات المرورية اليومية</a></h2>
+                        <div class="mh-blog-post-info">
+                            <ul>
+                                <li><a href="#">24.11.19</a><strong>بعد على</strong></li>
+                                <li><a href="#">ThemeSpiders</a><strong>بواسطة</strong></li>
+                            </ul>
+                        </div>
+                        <p>إنها حقيقة راسخة أن القارئ سوف يصرفه محتوى مقروء للصفحة عندما ينظر إلى تخطيطه</p>
+                        <a href="#">قراءة المزيد</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-4">
+                <div class="mh-blog-item dark-bg">
+                    <img src="{% static 'assets/images/b-2.png' %}" alt="" class="img-fluid">
+                    <div class="blog-inner">
+                        <h2><a href="#">حياة خالية من الاختناقات المرورية اليومية</a></h2>
+                        <div class="mh-blog-post-info">
+                            <ul>
+                                <li><a href="#">24.11.19</a><strong>بعد على</strong></li>
+                                <li><a href="#">ThemeSpiders</a><strong>بواسطة</strong></li>
+                            </ul>
+                        </div>
+                        <p>إنها حقيقة راسخة أن القارئ سوف يصرفه محتوى مقروء للصفحة عندما ينظر إلى تخطيطه</p>
+                        <a href="#">قراءة المزيد</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-4">
+                <div class="mh-blog-item dark-bg">
+                    <img src="{% static 'assets/images/b-1.png' %}" alt="" class="img-fluid">
+                    <div class="blog-inner">
+                        <h2><a href="#">حياة خالية من الاختناقات المرورية اليومية</a></h2>
+                        <div class="mh-blog-post-info">
+                            <ul>
+                                <li><a href="#">24.11.19</a><strong>بعد على</strong></li>
+                                <li><a href="#">ThemeSpiders</a><strong>بواسطة</strong></li>
+                            </ul>
+                        </div>
+                        <p>إنها حقيقة راسخة أن القارئ سوف يصرفه محتوى مقروء للصفحة عندما ينظر إلى تخطيطه</p>
+                        <a href="#">قراءة المزيد</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            
+            <!-- {% if user.is_superuser %}
+            <div class="col-12 text-center mt-4">
+                <a href="/admin/main/blogpost/" class="btn btn-outline-light">
+                    <i class="fa fa-cog"></i> إدارة المدونة
+                </a>
+                <a href="/admin/main/blogpost/add/" class="btn btn-outline-light ml-2">
+                    <i class="fa fa-plus"></i> إضافة منشور جديد
+                </a>
+            </div>
+            {% endif %} -->
+        </div>
+    </div>
+</section>
+        <!--
+        ===================
+           TESTIMONIAL 
+        ===================
+        -->
+        <section class="mh-testimonial" id="mh-testimonial">
+            <div class="home-v-img">
+                <div class="container">
+                    <div class="row section-separator">
+                        <div class="col-sm-12 section-title">
+                            <h3>مراجعات العملاء</h3>
+                        </div>
+                        <div class="col-sm-12" id="mh-client-review">
+                            <div class="each-client-item">
+                                <div class="mh-client-item dark-bg black-shadow-1">
+                                    <img src="{% static 'assets/images/c-1.png' %}" alt="" class="img-fluid">
+                                    <p>المطلق رائع! أنا مهب تماما. أفضل جدا. لقد دهشت من الجودة</p>
+                                    <h4>جون مايك</h4>
+                                    <span>المدير التنفيذي ، Author.Inc</span>
+                                </div>
+                            </div>
+                            <div class="each-client-item">
+                                <div class="mh-client-item dark-bg black-shadow-1">
+                                    <img src="{% static 'assets/images/c-1.png' %}" alt="" class="img-fluid">
+                                    <p>المطلق رائع! أنا مهب تماما. أفضل جدا. لقد دهشت من الجودة</p>
+                                    <h4>جون مايك</h4>
+                                    <span>المدير التنفيذي ، Author.Inc</span>
+                                </div>
+                            </div>                    
+                            
+                            <div class="each-client-item">
+                                <div class="mh-client-item dark-bg black-shadow-1">
+                                    <img src="{% static 'assets/images/c-1.png' %}" alt="" class="img-fluid">
+                                    <p>المطلق رائع! أنا مهب تماما. أفضل جدا. لقد دهشت من الجودة</p>
+                                    <h4>جون مايك</h4>
+                                    <span>المدير التنفيذي ، Author.Inc</span>
+                                </div>
+                            </div>
+                            <div class="each-client-item">
+                                <div class="mh-client-item dark-bg black-shadow-1">
+                                    <img src="{% static 'assets/images/c-1.png' %}" alt="" class="img-fluid">
+                                    <p>المطلق رائع! أنا مهب تماما. أفضل جدا. لقد دهشت من الجودة</p>
+                                    <h4>مصطفي</h4>
+                                    <span>المدير التنفيذي ، Author.Inc</span>
+                                </div>
+                            </div>
+                            <div class="each-client-item">
+                                <div class="mh-client-item dark-bg black-shadow-1">
+                                    <img src="{% static 'assets/images/c-1.png' %}" alt="" class="img-fluid">
+                                    <p>المطلق رائع! أنا مهب تماما. أفضل جدا. لقد دهشت من الجودة</p>
+                                    <h4>جون مايك</h4>
+                                    <span>المدير التنفيذي ، Author.Inc</span>
+                                </div>
+                            </div>                    
+                            
+                            <div class="each-client-item">
+                                <div class="mh-client-item dark-bg black-shadow-1">
+                                    <img src="{% static 'assets/images/c-1.png' %}" alt="" class="img-fluid">
+                                    <p>المطلق رائع! أنا مهب تماما. أفضل جدا. لقد دهشت من الجودة</p>
+                                    <h4>مصطفي </h4>
+                                    <span>المدير التنفيذي ، Author.Inc</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!--
+        ===================
+            FOOTER 
+        ===================
+        -->
+        <footer class="mh-footer" id="mh-contact">
+            <div class="map-image image-bg">
+                <div class="container">
+                    <div class="row section-separator">
+                        <div class="col-sm-12 section-title">
+                            <h3>اتصل بي</h3>
+                        </div>
+                        <div class="col-sm-12 mh-footer-address">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-4">
+                                    <div class="mh-address-footer-item dark-bg shadow-1">
+                                        <div class="each-icon">
+                                            <i class="fa fa-location-arrow"></i>
+                                        </div>
+                                        <div class="each-info">
+                                            <h4>عنوان</h4>
+                                            <address>
+                                               الطابق  طريق السحل  ،الاسكندرية   ، <br> 
+                                                  جمهورية مصر العربية
+                                            </address>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-4">
+                                    <div class="mh-address-footer-item dark-bg shadow-1">
+                                        <div class="each-icon">
+                                            <i class="fa fa-envelope-o"></i>
+                                        </div> 
+                                        <div class="each-info">
+                                            <h4>البريد الإلكتروني</h4>
+                                            <a href="mostafaqq7q@gmail.com">mostafaqq7q@gmail.com</a><br>
+                                            <a href="mostafaqq7q@gmail.com">mostafaqq7q@gmail.com</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-4">
+                                    <div class="mh-address-footer-item dark-bg shadow-1">
+                                        <div class="each-icon">
+                                            <i class="fa fa-phone"></i>
+                                        </div>
+                                        <div class="each-info">
+                                            <h4>هاتف</h4>
+                                            <a href="callto:(+20)1550658172">(+20)1550658172</a><br>
+                                            <a href="callto:(+20)1200522214">(+20)1200522214</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <form id="contactForm" class="single-form quate-form wow fadeInUp" data-toggle="validator">
+                                <div id="msgSubmit" class="h3 text-center hidden"></div>
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <input name="name" class="contact-name form-control" id="name" type="text" placeholder="الاسم الاول" required>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <input name="name" class="contact-email form-control" id="L_name" type="text" placeholder="الكنية" required>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <input name="name" class="contact-subject form-control" id="email" type="email" placeholder="بريدك الالكتروني" required>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <textarea class="contact-message" id="message" rows="6" placeholder="رسالتك" required></textarea>
+                                    </div>
+                                    <!-- Subject Button -->
+                                    <div class="btn-form col-sm-12">
+                                        <button type="submit" class="btn btn-fill btn-block" id="form-submit">ارسل رسالة</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <div class="mh-map">
+                                <div id="mh-map" class="shadow-1"></div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 mh-copyright">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="text-right text-xs-center">
+                                       <p><a href="#">mostafa</a></p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <ul class="social-icon">
+                                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-github"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>          
+        
+        
+    
+    <!--
+    ==============
+    * JS Files *
+    ==============
+    -->
+    
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    
+    <!-- jQuery -->
+    <script src="{% static 'assets/plugins/js/jquery.min.js' %}"></script>
+    <!-- popper -->
+    <script src="{% static 'assets/plugins/js/popper.min.js' %}"></script>
+    <!-- bootstrap -->
+    <script src="{% static 'assets/plugins/js/bootstrap.min.js' %}"></script>
+    <!-- owl carousel -->
+    <script src="{% static 'assets/plugins/js/owl.carousel.js' %}"></script>
+    <!-- validator -->
+    <script src="{% static 'assets/plugins/js/validator.min.js' %}"></script>
+    <!-- wow -->
+    <script src="{% static 'assets/plugins/js/wow.min.js' %}"></script>
+    <!-- mixin js-->
+    <script src="{% static 'assets/plugins/js/jquery.mixitup.min.js' %}"></script>
+    <!-- circle progress-->
+    <script src="{% static 'assets/plugins/js/circle-progress.js' %}"></script>
+    <!-- jquery nav -->
+    <script src="{% static 'assets/plugins/js/jquery.nav.js' %}"></script>
+    <!-- Fancybox js-->
+    <script src="{% static 'assets/plugins/js/jquery.fancybox.min.js' %}"></script>
+    <!-- isotope js-->
+    <script src="{% static 'assets/plugins/js/isotope.pkgd.js' %}"></script>
+    <script src="{% static 'assets/plugins/js/packery-mode.pkgd.js' %}"></script>
+    <!-- Map api -->
+    <script src="http://maps.googleapis.com/maps/api/js?v=3.exp&amp;key=AIzaSyCRP2E3BhaVKYs7BvNytBNumU0MBmjhhxc"></script>
+    <!-- Custom Scripts-->
+    <script src="{% static 'assets/js/map-init.js' %}"></script>
+    <script src="{% static 'assets/js/custom-scripts.js' %}"></script>
+    
+    
+    <!-- ****************
+      After neccessary customization/modification, Please minify 
+      JavaScript/jQuery according to http://browserdiet.com/en/ for better performance
+    **************** -->
+    <!-- STYLE SWITCH STYLESHEET ONLY FOR DEMO -->
+    <link rel="stylesheet" href="{% static 'demo/demo.css' %}">
+    <script type="text/javascript" src="{% static 'demo/styleswitcher.js' %}"></script>
+    <script type="text/javascript" src="{% static 'demo/demo.js' %}"></script>
+        <div class="demo-style-switch" id="switch-style">
+    <a id="toggle-switcher" class="switch-button"><i class="fa fa-snowflake-o fa-spin"></i></a>
+    <div class="switched-options">
+    <ul>
+        <!-- <li class="mh-demo-styles"> 
+            <h4>Style One </h4>
+            <ul>
+                <li>
+                    <a href="home-one.html"> <img src="{% static 'assets/images/h1w.png' %}" alt="" class="img-fluid"></a>
+                </li>
+                <li>
+                    <a href="home-one-w.html"> <img src="{% static 'assets/images/h1.png' %}" alt="" class="img-fluid"></a>
+                </li>
+            </ul>
+        </li> -->
+        <!-- <li class="mh-demo-styles"> 
+            <h4>Style Two </h4>
+            <ul>
+                <li>
+                    <a href="home-two.html"> <img src="{% static 'assets/images/h2w.png' %}" alt="" class="img-fluid"></a>
+                </li>
+                <li>
+                    <a href="home-two-w.html"> <img src="{% static 'assets/images/h2.png' %}" alt="" class="img-fluid"></a>
+                </li>
+            </ul>
+        </li>                  -->
+        
+        <li class="mh-demo-styles"> 
+            <h4>RTl</h4>
+            <ul>
+                <li>
+                    <a href="#"> <img src="{% static 'assets/images/h3w.png' %}" alt="" class="img-fluid"></a>
+                </li>
+                <!-- <li>
+                    <a href="home-rtl-w.html"> <img src="{% static 'assets/images/h3.png' %}" alt="" class="img-fluid"></a>
+                </li> -->
+            </ul>
+        </li>                
+    </ul>
+    <div class="config-title">
+        Colors :
+    </div>
+    <ul class="styles">
+        <li><a href="#" onclick="setActiveStyleSheet('blue'); return false;" title="Blue">
+            <div class="blue"></div></a>
+        </li>
+        <li><a href="#" onclick="setActiveStyleSheet('purple'); return false;" title="Purple">
+            <div class="purple"></div></a>
+        </li>
+        <li><a href="#" onclick="setActiveStyleSheet('blue-munsell'); return false;" title="Blue Munsell">
+            <div class="blue-munsell"></div></a>
+        </li>
+        <li><a href="#" onclick="setActiveStyleSheet('orange'); return false;" title="Orange">
+            <div class="orange"></div></a>
+        </li>
+        <li><a href="#" onclick="setActiveStyleSheet('slate'); return false;" title="Slate">
+            <div class="slate"></div></a>
+        </li>
+        <li><a href="#" onclick="setActiveStyleSheet('green'); return false;" title="Green">
+            <div class="green"></div></a>
+        </li>
+        <li><a href="#" onclick="setActiveStyleSheet('yellow'); return false;" title="Yellow">
+            <div class="yellow"></div></a>
+        </li>
+        <li><a href="#" onclick="setActiveStyleSheet('red'); return false;" title="Red">
+            <div class="red"></div></a>
+        </li>
+    </ul>
+    </div>
+    </div>
+</body>
+
+</html>
