@@ -261,3 +261,205 @@ class BlogPost(models.Model):
         
     def get_absolute_url(self):
         return f"/blog/{self.slug}/"
+
+
+
+
+
+class PortfolioCategory(models.Model):
+    name = models.CharField(max_length=100, verbose_name="اسم التصنيف")
+    slug = models.SlugField(max_length=100, unique=True, verbose_name="رابط التصنيف")
+    filter_class = models.CharField(
+        max_length=50, 
+        verbose_name="فئة التصفية",
+        help_text="استخدم نفس القيمة المستخدمة في القالب (مثال: user-interface, branding)"
+    )
+    is_active = models.BooleanField(default=True, verbose_name="مفعل")
+    order = models.PositiveIntegerField(default=0, verbose_name="الترتيب")
+    
+    class Meta:
+        verbose_name = "تصنيف المحفظة"
+        verbose_name_plural = "تصنيفات المحفظة"
+        ordering = ['order']
+    
+    def __str__(self):
+        return self.name
+    
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
+
+class PortfolioItem(models.Model):
+    title = models.CharField(max_length=200, verbose_name="عنوان المشروع")
+    slug = models.SlugField(max_length=200, unique=True, verbose_name="رابط المشروع")
+    description = models.TextField(verbose_name="وصف المشروع")
+    short_description = models.CharField(max_length=200, verbose_name="وصف مختصر")
+    categories = models.ManyToManyField(
+        PortfolioCategory, 
+        verbose_name="التصنيفات"
+    )
+    main_image = models.ImageField(
+        upload_to='portfolio/main/',
+        verbose_name="الصورة الرئيسية"
+    )
+    project_url = models.URLField(
+        blank=True, 
+        null=True, 
+        verbose_name="رابط المشروع"
+    )
+    technologies = models.TextField(
+        verbose_name="التقنيات المستخدمة",
+        help_text="أدخل كل تقنية في سطر جديد",
+        blank=True
+    )
+    is_active = models.BooleanField(default=True, verbose_name="مفعل")
+    order = models.PositiveIntegerField(default=0, verbose_name="الترتيب")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        verbose_name = "عنصر المحفظة"
+        verbose_name_plural = "عناصر المحفظة"
+        ordering = ['order']
+    
+    def __str__(self):
+        return self.title
+    
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
+    
+    def get_technologies_list(self):
+        return self.technologies.split('\n') if self.technologies else []
+    
+    def get_categories_classes(self):
+        return " ".join([cat.filter_class for cat in self.categories.all()])
+
+class PortfolioImage(models.Model):
+    portfolio_item = models.ForeignKey(
+        PortfolioItem, 
+        on_delete=models.CASCADE, 
+        related_name='images'
+    )
+    image = models.ImageField(
+        upload_to='portfolio/gallery/',
+        verbose_name="صورة"
+    )
+    caption = models.CharField(
+        max_length=200, 
+        blank=True, 
+        verbose_name="وصف الصورة"
+    )
+    order = models.PositiveIntegerField(default=0, verbose_name="الترتيب")
+    
+    class Meta:
+        verbose_name = "صورة المحفظة"
+        verbose_name_plural = "صور المحفظة"
+        ordering = ['order']
+    
+    def __str__(self):
+        return f"{self.portfolio_item.title} - {self.caption}"
+
+
+# #######################################################################
+# نموذج معلومات الاتصال ونموذج إرسال الرسائل    
+from django.db import models
+from django.core.mail import send_mail
+from django.conf import settings
+
+class ContactInfo(models.Model):
+    address = models.TextField(verbose_name="العنوان")
+    email = models.EmailField(verbose_name="البريد الإلكتروني")
+    secondary_email = models.EmailField(
+        blank=True, 
+        null=True, 
+        verbose_name="بريد إلكتروني إضافي"
+    )
+    phone = models.CharField(max_length=20, verbose_name="الهاتف")
+    secondary_phone = models.CharField(
+        max_length=20, 
+        blank=True, 
+        null=True, 
+        verbose_name="هاتف إضافي"
+    )
+    map_embed_code = models.TextField(
+        blank=True, 
+        null=True, 
+        verbose_name="كود الخريطة",
+        help_text="أدخل كود iframe للخريطة من Google Maps"
+    )
+    is_active = models.BooleanField(default=True, verbose_name="مفعل")
+    
+    class Meta:
+        verbose_name = "معلومات الاتصال"
+        verbose_name_plural = "معلومات الاتصال"
+    
+    def __str__(self):
+        return "معلومات الاتصال"
+
+class ContactSubmission(models.Model):
+    STATUS_CHOICES = (
+        ('new', 'جديد'),
+        ('read', 'تم القراءة'),
+        ('replied', 'تم الرد'),
+        ('archived', 'مؤرشف'),
+    )
+    
+    first_name = models.CharField(max_length=100, verbose_name="الاسم الأول")
+    last_name = models.CharField(max_length=100, verbose_name="الاسم الأخير")
+    email = models.EmailField(verbose_name="البريد الإلكتروني")
+    message = models.TextField(verbose_name="الرسالة")
+    status = models.CharField(
+        max_length=10, 
+        choices=STATUS_CHOICES, 
+        default='new',
+        verbose_name="الحالة"
+    )
+    ip_address = models.GenericIPAddressField(
+        blank=True, 
+        null=True, 
+        verbose_name="عنوان IP"
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        verbose_name = "رسالة تواصل"
+        verbose_name_plural = "رسائل التواصل"
+        ordering = ['-created_at']
+    
+    def __str__(self):
+        return f"{self.first_name} {self.last_name} - {self.email}"
+    
+    def save(self, *args, **kwargs):
+        # إرسال إشعار بالبريد الإلكتروني عند إنشاء رسالة جديدة
+        if self._state.adding and self.status == 'new':
+            super().save(*args, **kwargs)
+            self.send_notification_email()
+        else:
+            super().save(*args, **kwargs)
+    
+    def send_notification_email(self):
+        subject = f"رسالة تواصل جديدة من {self.first_name} {self.last_name}"
+        message = f"""
+        اسم المرسل: {self.first_name} {self.last_name}
+        البريد الإلكتروني: {self.email}
+        الرسالة:
+        {self.message}
+        
+        تم الاستلام في: {self.created_at}
+        """
+        
+        try:
+            send_mail(
+                subject,
+                message,
+                settings.DEFAULT_FROM_EMAIL,
+                [admin[1] for admin in settings.ADMINS],
+                fail_silently=False,
+            )
+        except Exception as e:
+            # تسجيل الخطأ دون إيقاف العملية
+            pass

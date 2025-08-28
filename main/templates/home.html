@@ -394,6 +394,157 @@
         </div>
     </div>
 </section>
+<!-- ############################################### -->
+ <!--
+===================
+   PORTFOLIO 
+===================
+-->
+<section class="mh-portfolio" id="mh-portfolio">
+    <div class="container">
+        <div class="row section-separator">
+            <div class="section-title col-sm-12">
+                <h3>المحفظة الأخيرة</h3>
+            </div>
+            <div class="part col-sm-12">
+                <div class="portfolio-nav col-sm-12" id="filter-button">
+                    <ul>
+                        <li data-filter="*" class="current"> <span>جميع الفئات</span></li>
+                        {% for category in portfolio_categories %}
+                        <li data-filter=".{{ category.filter_class }}"><span>{{ category.name }}</span></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="mh-project-gallery col-sm-12" id="project-gallery">
+                    <div class="portfolioContainer row">
+                        {% for item in portfolio_items %}
+                        <div class="grid-item col-md-4 col-sm-6 col-xs-12 {{ item.get_categories_classes }}">
+                            <figure>
+                                <img src="{{ item.main_image.url }}" alt="{{ item.title }}" class="img-fluid">
+                                <figcaption class="fig-caption">
+                                    <i class="fa fa-search"></i>
+                                    <h5 class="title">{{ item.title }}</h5>
+                                    <span class="sub-title">{{ item.short_description }}</span>
+                                    <a href="#portfolio-modal-{{ item.slug }}" data-fancybox data-src="#portfolio-modal-{{ item.slug }}"></a>
+                                </figcaption>
+                            </figure>
+                        </div>
+                        {% empty %}
+                        <!-- محتوى افتراضي إذا لم توجد عناصر -->
+                        <div class="grid-item col-md-4 col-sm-6 col-xs-12 user-interface">
+                            <figure>
+                                <img src="{% static 'assets/images/portfolio/g1.jpg' %}" alt="img04">
+                                <figcaption class="fig-caption">
+                                    <i class="fa fa-search"></i>
+                                    <h5 class="title">التصميم الإبداعي</h5>
+                                    <span class="sub-title">التصوير</span>
+                                    <a data-fancybox data-src="#mh"></a>
+                                </figcaption>
+                            </figure>
+                        </div>
+                        <!-- يمكنك إضافة المزيد من العناصر الافتراضية هنا -->
+                        {% endfor %}
+                    </div> <!-- End: .grid .project-gallery -->
+                </div> <!-- End: .grid .project-gallery -->
+            </div> <!-- End: .part -->
+        </div> <!-- End: .row -->
+    </div>
+    
+    <!-- النوافذ المنبثقة لعناصر المحفظة -->
+    {% for item in portfolio_items %}
+    <div class="mh-portfolio-modal" id="portfolio-modal-{{ item.slug }}">
+        <div class="container">
+            <div class="row mh-portfolio-modal-inner">
+                <div class="col-sm-5">
+                    <h2>{{ item.title }}</h2>
+                    <p>{{ item.description }}</p>
+                    
+                    {% if item.technologies %}
+                    <div class="mh-about-tag">
+                        <ul>
+                            {% for tech in item.get_technologies_list %}
+                            <li><span>{{ tech }}</span></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% endif %}
+                    
+                    {% if item.project_url %}
+                    <a href="{{ item.project_url }}" class="btn btn-fill" target="_blank">عرض حي</a>
+                    {% endif %}
+                </div>
+                <div class="col-sm-7">
+                    <div class="mh-portfolio-modal-img">
+                        <img src="{{ item.main_image.url }}" alt="{{ item.title }}" class="img-fluid">
+                        <p>{{ item.short_description }}</p>
+                        
+                        {% for image in item.images.all %}
+                        <img src="{{ image.image.url }}" alt="{{ image.caption }}" class="img-fluid">
+                        {% if image.caption %}<p>{{ image.caption }}</p>{% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    
+    <!-- النافذة المنبثقة الافتراضية -->
+    <div class="mh-portfolio-modal" id="mh">
+        <div class="container">
+            <div class="row mh-portfolio-modal-inner">
+                <div class="col-sm-5">
+                    <h2>Wrap - ملحق إضافي</h2>
+                    <p>ال
+                    تفاف هو قالب الصفحة المقصودة متعددة الأغراض نظيفة وأنيقة. سيكون مناسبًا تمامًا لـ Startup أو Web App أو أي نوع من خدمات الويب. لديها 4 أنماط الخلفية مع أنماط الصفحة الرئيسية 6. 6 مخطط لون محدد مسبقا. يتم تنظيم
+                    جميع الأشكال بشكل منفصل بحيث يمكنك استخدام / تخصيص القالب بسهولة بالغة.</p>       
+                    
+                   <p>ال
+                    تفاف هو قالب الصفحة المقصودة متعددة الأغراض نظيفة وأنيقة. سيكون مناسبًا تمامًا لـ Startup أو Web App أو أي نوع من خدمات الويب. لديها 4 أنماط الخلفية مع أنماط الصفحة الرئيسية 6. 6 مخطط لون محدد مسبقا. يتم تنظيم
+                    جميع الأشكال بشكل منفصل بحيث يمكنك استخدام / تخصيص القالب بسهولة بالغة.</p>       
+                         
+                    <div class="mh-about-tag">
+                        <ul>
+                            <li><span>python</span></li>
+                            <li><span>html</span></li>
+                            <li><span>css</span></li>
+                            <li><span>Django</span></li>
+                            <li><span>microsoft 365 </span></li>
+                            <li><span>Javascript</span></li>
+                        </ul>
+                    </div>
+                    <a href="#" class="btn btn-fill">عرض حي</a>
+                </div>
+                <div class="col-sm-7">
+                    <div class="mh-portfolio-modal-img">
+                        <img src="{% static 'assets/images/pr-1.jif' %}" alt="" class="img-fluid">
+                        <p>يتم تنظيم جميع الأشكال بشكل منفصل بحيث يمكنك استخدام / تخصيص القالب بسهولة بالغة.</p>    
+                        <img src="{% static 'assets/images/pr-1.jif' %}" alt="" class="img-fluid">
+                        <p>يتم تنظيم جميع الأشكال بشكل منفصل بحيث يمكنك استخدام / تخصيص القالب بسهولة بالغة.</p>    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- {% if user.is_superuser %}
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-12 text-center">
+                <a href="/admin/main/portfolioitem/" class="btn btn-outline-light mr-2">
+                    <i class="fa fa-cog"></i> إدارة المحفظة
+                </a>
+                <a href="/admin/main/portfoliocategory/" class="btn btn-outline-light mr-2">
+                    <i class="fa fa-tags"></i> إدارة التصنيفات
+                </a>
+                <a href="/admin/main/portfolioitem/add/" class="btn btn-outline-light">
+                    <i class="fa fa-plus"></i> إضافة مشروع جديد
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endif %} -->
+</section>
         
         <!--
 ===================
@@ -651,112 +802,184 @@
             </div>
         </section>
         
-        <!--
-        ===================
-            FOOTER 
-        ===================
-        -->
-        <footer class="mh-footer" id="mh-contact">
-            <div class="map-image image-bg">
-                <div class="container">
-                    <div class="row section-separator">
-                        <div class="col-sm-12 section-title">
-                            <h3>اتصل بي</h3>
-                        </div>
-                        <div class="col-sm-12 mh-footer-address">
-                            <div class="row">
-                                <div class="col-sm-12 col-md-4">
-                                    <div class="mh-address-footer-item dark-bg shadow-1">
-                                        <div class="each-icon">
-                                            <i class="fa fa-location-arrow"></i>
-                                        </div>
-                                        <div class="each-info">
-                                            <h4>عنوان</h4>
-                                            <address>
-                                               الطابق  طريق السحل  ،الاسكندرية   ، <br> 
-                                                  جمهورية مصر العربية
-                                            </address>
-                                        </div>
-                                    </div>
+       <!--
+===================
+   FOOTER 
+===================
+-->
+<footer class="mh-footer" id="mh-contact">
+    <div class="map-image image-bg">
+        <div class="container">
+            <div class="row section-separator">
+                <div class="col-sm-12 section-title">
+                    <h3>اتصل بي</h3>
+                </div>
+                <div class="col-sm-12 mh-footer-address">
+                    <div class="row">
+                        {% if contact_info %}
+                        <div class="col-sm-12 col-md-4">
+                            <div class="mh-address-footer-item dark-bg shadow-1">
+                                <div class="each-icon">
+                                    <i class="fa fa-location-arrow"></i>
                                 </div>
-                                <div class="col-sm-12 col-md-4">
-                                    <div class="mh-address-footer-item dark-bg shadow-1">
-                                        <div class="each-icon">
-                                            <i class="fa fa-envelope-o"></i>
-                                        </div> 
-                                        <div class="each-info">
-                                            <h4>البريد الإلكتروني</h4>
-                                            <a href="mostafaqq7q@gmail.com">mostafaqq7q@gmail.com</a><br>
-                                            <a href="mostafaqq7q@gmail.com">mostafaqq7q@gmail.com</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 col-md-4">
-                                    <div class="mh-address-footer-item dark-bg shadow-1">
-                                        <div class="each-icon">
-                                            <i class="fa fa-phone"></i>
-                                        </div>
-                                        <div class="each-info">
-                                            <h4>هاتف</h4>
-                                            <a href="callto:(+20)1550658172">(+20)1550658172</a><br>
-                                            <a href="callto:(+20)1200522214">(+20)1200522214</a>
-                                        </div>
-                                    </div>
+                                <div class="each-info">
+                                    <h4>عنوان</h4>
+                                    <address>{{ contact_info.address }}</address>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-12 col-md-6">
-                            <form id="contactForm" class="single-form quate-form wow fadeInUp" data-toggle="validator">
-                                <div id="msgSubmit" class="h3 text-center hidden"></div>
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-12">
-                                        <input name="name" class="contact-name form-control" id="name" type="text" placeholder="الاسم الاول" required>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12">
-                                        <input name="name" class="contact-email form-control" id="L_name" type="text" placeholder="الكنية" required>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <input name="name" class="contact-subject form-control" id="email" type="email" placeholder="بريدك الالكتروني" required>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <textarea class="contact-message" id="message" rows="6" placeholder="رسالتك" required></textarea>
-                                    </div>
-                                    <!-- Subject Button -->
-                                    <div class="btn-form col-sm-12">
-                                        <button type="submit" class="btn btn-fill btn-block" id="form-submit">ارسل رسالة</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="col-sm-12 col-md-6">
-                            <div class="mh-map">
-                                <div id="mh-map" class="shadow-1"></div>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 mh-copyright">
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="text-right text-xs-center">
-                                       <p><a href="#">mostafa</a></p>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <ul class="social-icon">
-                                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-github"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                                    </ul>
+                        <div class="col-sm-12 col-md-4">
+                            <div class="mh-address-footer-item dark-bg shadow-1">
+                                <div class="each-icon">
+                                    <i class="fa fa-envelope-o"></i>
+                                </div> 
+                                <div class="each-info">
+                                    <h4>البريد الإلكتروني</h4>
+                                    <a href="mailto:{{ contact_info.email }}">{{ contact_info.email }}</a><br>
+                                    {% if contact_info.secondary_email %}
+                                    <a href="mailto:{{ contact_info.secondary_email }}">{{ contact_info.secondary_email }}</a>
+                                    {% endif %}
                                 </div>
                             </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4">
+                            <div class="mh-address-footer-item dark-bg shadow-1">
+                                <div class="each-icon">
+                                    <i class="fa fa-phone"></i>
+                                </div>
+                                <div class="each-info">
+                                    <h4>هاتف</h4>
+                                    <a href="tel:{{ contact_info.phone }}">{{ contact_info.phone }}</a><br>
+                                    {% if contact_info.secondary_phone %}
+                                    <a href="tel:{{ contact_info.secondary_phone }}">{{ contact_info.secondary_phone }}</a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% else %}
+                        <!-- محتوى افتراضي إذا لم توجد معلومات اتصال -->
+                        <div class="col-sm-12 col-md-4">
+                            <div class="mh-address-footer-item dark-bg shadow-1">
+                                <div class="each-icon">
+                                    <i class="fa fa-location-arrow"></i>
+                                </div>
+                                <div class="each-info">
+                                    <h4>عنوان</h4>
+                                    <address>
+                                       الطابق طريق السحل، الإسكندرية، جمهورية مصر العربية
+                                    </address>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4">
+                            <div class="mh-address-footer-item dark-bg shadow-1">
+                                <div class="each-icon">
+                                    <i class="fa fa-envelope-o"></i>
+                                </div> 
+                                <div class="each-info">
+                                    <h4>البريد الإلكتروني</h4>
+                                    <a href="mailto:mostafaqq7q@gmail.com">mostafaqq7q@gmail.com</a><br>
+                                    <a href="mailto:mostafaqq7q@gmail.com">mostafaqq7q@gmail.com</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4">
+                            <div class="mh-address-footer-item dark-bg shadow-1">
+                                <div class="each-icon">
+                                    <i class="fa fa-phone"></i>
+                                </div>
+                                <div class="each-info">
+                                    <h4>هاتف</h4>
+                                    <a href="tel:+201550658172">(+20) 1550658172</a><br>
+                                    <a href="tel:+201200522214">(+20) 1200522214</a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                    <form id="contactForm" class="single-form quate-form wow fadeInUp" method="POST" action="{% url 'contact_submit' %}">
+                        {% csrf_token %}
+                        <div id="msgSubmit" class="h3 text-center hidden"></div>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12">
+                                <input name="first_name" class="contact-name form-control" id="name" type="text" placeholder="الاسم الاول" required>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <input name="last_name" class="contact-email form-control" id="L_name" type="text" placeholder="الكنية" required>
+                            </div>
+                            <div class="col-sm-12">
+                                <input name="email" class="contact-subject form-control" id="email" type="email" placeholder="بريدك الالكتروني" required>
+                            </div>
+                            <div class="col-sm-12">
+                                <textarea name="message" class="contact-message" id="message" rows="6" placeholder="رسالتك" required></textarea>
+                            </div>
+                            <!-- Subject Button -->
+                            <div class="btn-form col-sm-12">
+                                <button type="submit" class="btn btn-fill btn-block" id="form-submit">ارسل رسالة</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                    <div class="mh-map">
+                        {% if contact_info and contact_info.map_embed_code %}
+                            {{ contact_info.map_embed_code|safe }}
+                        {% else %}
+                            <div id="mh-map" class="shadow-1"></div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="col-sm-12 mh-copyright">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="text-right text-xs-center">
+                               <p><a href="#">mostafa</a></p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <ul class="social-icon">
+                                {% if content.facebook_url %}
+                                <li><a href="{{ content.facebook_url }}" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                                {% endif %}
+                                
+                                {% if content.twitter_url %}
+                                <li><a href="{{ content.twitter_url }}" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                                {% endif %}
+                                
+                                {% if content.github_url %}
+                                <li><a href="{{ content.github_url }}" target="_blank"><i class="fa fa-github"></i></a></li>
+                                {% endif %}
+                                
+                                {% if content.dribbble_url %}
+                                <li><a href="{{ content.dribbble_url }}" target="_blank"><i class="fa fa-dribbble"></i></a></li>
+                                {% endif %}
+                            </ul>
                         </div>
                     </div>
                 </div>
+                
+                <!-- {% if user.is_superuser %}
+                <div class="col-12 text-center mt-4">
+                    {% if contact_info %}
+                    <a href="/admin/main/contactinfo/{{ contact_info.id }}/change/" class="btn btn-outline-light mr-2">
+                        <i class="fa fa-edit"></i> تعديل معلومات الاتصال
+                    </a>
+                    {% else %}
+                    <a href="/admin/main/contactinfo/add/" class="btn btn-outline-light mr-2">
+                        <i class="fa fa-plus"></i> إضافة معلومات الاتصال
+                    </a>
+                    {% endif %}
+                    <a href="/admin/main/contactsubmission/" class="btn btn-outline-light">
+                        <i class="fa fa-envelope"></i> إدارة رسائل التواصل
+                    </a>
+                </div>
+                {% endif %} -->
             </div>
-        </footer>          
-        
-        
-    
+        </div>
+    </div>
+</footer>
     <!--
     ==============
     * JS Files *

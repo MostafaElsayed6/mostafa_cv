@@ -182,3 +182,117 @@ class BlogPostAdmin(admin.ModelAdmin):
             return format_html('<img src="{}" width="150" />', obj.cover_image.url)
         return "لا توجد صورة"
     cover_image_preview.short_description = "معاينة الصورة"
+
+#######################################
+
+
+class PortfolioImageInline(admin.TabularInline):
+    model = PortfolioImage
+    extra = 1
+    fields = ('image', 'caption', 'order')
+
+@admin.register(PortfolioCategory)
+class PortfolioCategoryAdmin(admin.ModelAdmin):
+    list_display = ('name', 'filter_class', 'order', 'is_active')
+    list_editable = ('order', 'is_active')
+    list_filter = ('is_active',)
+    search_fields = ('name', 'filter_class')
+    prepopulated_fields = {'slug': ('name',)}
+
+@admin.register(PortfolioItem)
+class PortfolioItemAdmin(admin.ModelAdmin):
+    list_display = ('title', 'display_categories', 'order', 'is_active', 'main_image_preview')
+    list_editable = ('order', 'is_active')
+    list_filter = ('is_active', 'categories')
+    search_fields = ('title', 'description')
+    prepopulated_fields = {'slug': ('title',)}
+    filter_horizontal = ('categories',)
+    inlines = [PortfolioImageInline]
+    
+    fieldsets = (
+        (None, {
+            'fields': (
+                'title', 
+                'slug', 
+                'description',
+                'short_description',
+                'categories',
+                'main_image',
+                'main_image_preview',
+                'project_url',
+                'technologies'
+            )
+        }),
+        ('الإعدادات', {
+            'fields': ('is_active', 'order')
+        }),
+    )
+    
+    readonly_fields = ('main_image_preview',)
+    
+    def main_image_preview(self, obj):
+        if obj.main_image:
+            return format_html('<img src="{}" width="150" />', obj.main_image.url)
+        return "لا توجد صورة"
+    main_image_preview.short_description = "معاينة الصورة"
+    
+    def display_categories(self, obj):
+        return ", ".join([cat.name for cat in obj.categories.all()])
+    display_categories.short_description = "التصنيفات"
+
+@admin.register(PortfolioImage)
+class PortfolioImageAdmin(admin.ModelAdmin):
+    list_display = ('portfolio_item', 'caption', 'order', 'image_preview')
+    list_editable = ('order',)
+    list_filter = ('portfolio_item',)
+    
+    def image_preview(self, obj):
+        if obj.image:
+            return format_html('<img src="{}" width="100" />', obj.image.url)
+        return "لا توجد صورة"
+    image_preview.short_description = "معاينة الصورة"
+#######################################
+# النماذج الخاصة بمعلومات الاتصال ونموذج إرسال الرسائل
+
+@admin.register(ContactInfo)
+class ContactInfoAdmin(admin.ModelAdmin):
+    list_display = ('address', 'email', 'phone', 'is_active')
+    list_editable = ('is_active',)
+    
+    def has_add_permission(self, request):
+        # منع إضافة أكثر من سجل واحد
+        return not ContactInfo.objects.exists()
+
+@admin.register(ContactSubmission)
+class ContactSubmissionAdmin(admin.ModelAdmin):
+    list_display = ('first_name', 'last_name', 'email', 'status', 'created_at')
+    list_editable = ('status',)
+    list_filter = ('status', 'created_at')
+    search_fields = ('first_name', 'last_name', 'email', 'message')
+    readonly_fields = ('ip_address', 'created_at', 'updated_at')
+    actions = ['mark_as_read', 'mark_as_replied']
+    
+    fieldsets = (
+        ('معلومات المرسل', {
+            'fields': (
+                'first_name', 
+                'last_name', 
+                'email',
+                'ip_address'
+            )
+        }),
+        ('الرسالة', {
+            'fields': ('message',)
+        }),
+        ('التتبع', {
+            'fields': ('status', 'created_at', 'updated_at')
+        }),
+    )
+    
+    def mark_as_read(self, request, queryset):
+        queryset.update(status='read')
+    mark_as_read.short_description = "وضع علامة كمقروء"
+    
+    def mark_as_replied(self, request, queryset):
+        queryset.update(status='replied')
+    mark_as_replied.short_description = "وضع علامة كرد عليه"

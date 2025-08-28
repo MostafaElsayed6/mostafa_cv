@@ -1,0 +1,77 @@
+<!-- templates/portfolio/detail.html -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="mh-portfolio-detail">
+    <div class="container">
+        <div class="row section-separator">
+            <div class="col-md-8 mx-auto">
+                <div class="portfolio-detail-header text-center mb-5">
+                    <h1>{{ item.title }}</h1>
+                    <p class="lead">{{ item.short_description }}</p>
+                    <div class="portfolio-categories">
+                        {% for category in item.categories.all %}
+                        <span class="badge badge-light mr-2">{{ category.name }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+                
+                <div class="portfolio-main-image mb-5">
+                    <img src="{{ item.main_image.url }}" alt="{{ item.title }}" class="img-fluid rounded shadow">
+                </div>
+                
+                <div class="portfolio-content mb-5">
+                    <h3>عن المشروع</h3>
+                    <p>{{ item.description|linebreaks }}</p>
+                </div>
+                
+                {% if item.technologies %}
+                <div class="portfolio-technologies mb-5">
+                    <h3>التقنيات المستخدمة</h3>
+                    <div class="mh-about-tag">
+                        <ul>
+                            {% for tech in item.get_technologies_list %}
+                            <li><span>{{ tech }}</span></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                {% endif %}
+                
+                {% if item.images.exists %}
+                <div class="portfolio-gallery mb-5">
+                    <h3>معرض الصور</h3>
+                    <div class="row">
+                        {% for image in item.images.all %}
+                        <div class="col-md-6 mb-4">
+                            <div class="portfolio-gallery-item">
+                                <img src="{{ image.image.url }}" alt="{{ image.caption|default:item.title }}" class="img-fluid rounded shadow">
+                                {% if image.caption %}
+                                <p class="text-center mt-2">{{ image.caption }}</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+                
+                {% if item.project_url %}
+                <div class="text-center mb-5">
+                    <a href="{{ item.project_url }}" class="btn btn-fill btn-lg" target="_blank">
+                        <i class="fa fa-external-link"></i> زيارة المشروع
+                    </a>
+                </div>
+                {% endif %}
+                
+                <div class="text-center">
+                    <a href="{% url 'home' %}#mh-portfolio" class="btn btn-outline-light">
+                        <i class="fa fa-arrow-left"></i> العودة إلى المحفظة
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
